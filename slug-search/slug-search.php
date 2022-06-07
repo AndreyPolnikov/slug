@@ -100,6 +100,12 @@ function acfSearchPosts($args) {
 function slug_posts_for_custom_post_page( $search ) {
     global $wpdb;
 
+    if(
+        ! did_action( 'load-edit.php' )
+        || ! is_admin()
+    )
+        return $search;
+
     $basicPostTypes = ['page', 'post'];
 
     if (!in_array($_GET['post_type'], $basicPostTypes)) {
